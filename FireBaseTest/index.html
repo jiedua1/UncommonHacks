@@ -28,7 +28,7 @@
     dbRef.on('value', snap => bigOne.innerText = snap.val());
     var image = document.getElementById("image");
     var imageLink = firebase.database().ref().child("imageURL");
-    imageLink.on('value', snap => image.src = snap.val());
+    imageLink.on('value', snap => {image.src = snap.val(); image.style = "width:500px; height:500px"});
 
   </script>
   <script src = "ourScripts.js"> </script>
