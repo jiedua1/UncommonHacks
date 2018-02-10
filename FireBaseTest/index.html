@@ -9,6 +9,7 @@
   <input  id = "textBox"> </input>
   <button id = "submitButton" onclick = "submit()"> Submit </button>
   <h1 id ="bigOne"> </h1>
+  <img id = "image"> </img>
 
   <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
   <script>
@@ -25,6 +26,9 @@
     var bigOne = document.getElementById("bigOne");
     var dbRef = firebase.database().ref().child('text');
     dbRef.on('value', snap => bigOne.innerText = snap.val());
+    var image = document.getElementById("image");
+    var imageLink = firebase.database().ref().child("imageURL");
+    imageLink.on('value', snap => image.src = snap.val());
 
   </script>
   <script src = "ourScripts.js"> </script>
