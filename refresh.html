@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+  </head>
+  <body>
+  <h1> Opening this page will refresh the memes <h1>
+  <input  id = "textBox"> </input>
+  <button id = "submitButton" onclick = "submit()"> Submit </button>
+  <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+  <script>
+    async function getImageURLs(pageName) {
+      var response = await get("https://graph.facebook.com/" + pageName + "/photos?type=uploaded&fields=images,page_story_id&access_token=1731421333568289|c578c16b3c12cd6d93b3d08e162a5ff3");
+      var responseObj = JSON.parse(response);
+      var URLarr = new Array(responseObj.data.length);
+      //creates an array with URLs of the images in reverse chronological order
+      for(var i = 0; i<25; i++) {
+    	   URLarr[i] =  responseObj.data[i].images[0].source;
+      }
+      return URLarr;
+    };
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDZtIhmpQElcmDwjC4KPNL-uAztxyVfEPg",
+      authDomain: "student-life-de3ef.firebaseapp.com",
+      databaseURL: "https://student-life-de3ef.firebaseio.com",
+      projectId: "student-life-de3ef",
+      storageBucket: "student-life-de3ef.appspot.com",
+      messagingSenderId: "126738000442"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+    var text = document.getElementById("textBox").value;
+    async function submit() {
+      var fireBaseRef = firebase.database().ref("Images/");
+      if(textBox.value !== "") {
+        var res = await getImageURLs(textBox.value);
+        fireBaseRef.update(res);
+      }
+    }
+
+    async function getImageURLs(pageName) {
+      var response = await get("https://graph.facebook.com/" + pageName + "/photos?type=uploaded&fields=images,page_story_id,created_time&access_token=1731421333568289|c578c16b3c12cd6d93b3d08e162a5ff3");
+      var responseObj = JSON.parse(response);
+      var URLarr = {};
+      //creates an array with URLs of the images in reverse chronological order
+      for(var i = 0; i<25; i++) {
+    	   URLarr["img" + i] = {
+           "url" : responseObj.data[i].images[0].source,
+           "date" : responseObj.data[i].created_time
+         }
+      }
+      return URLarr;
+    };
+
+    function get(url) {
+      return new Promise(function(resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.open('GET', url, true);
+        req.onload = function() {
+          if (req.status == 200) {
+            resolve(req.response);
+          }
+          else {
+            // Otherwise reject with the status text
+            // which will hopefully be a meaningful error
+            reject(Error(req.statusText));
+          }
+        };
+        req.onerror = function() {
+          reject(Error("Network Error"));
+        };
+        req.send();
+      });
+    };
+  </script>
+  </body>
+</html>
