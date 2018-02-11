@@ -23,6 +23,14 @@
     <!-- Custom styles for this template -->
     <link href="css/agency.min.css" rel="stylesheet">
 
+    <!-- material icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+		body {background-image: url("img/maroon_transparent.png");} 
+	</style>
+
+
   </head>
 
   <body id="page-top">
@@ -78,11 +86,22 @@
             </div>
             <div class="card-body">
               <div class="display-4">Rate this meme:</div>
-              <label class="radio-inline"><input type="radio" name="optradio"> 1</label>
-              <label class="radio-inline"><input type="radio" name="optradio"> 2</label>
-              <label class="radio-inline"><input type="radio" name="optradio"> 3</label>
-              <label class="radio-inline"><input type="radio" name="optradio"> 4</label>
-              <label class="radio-inline"><input type="radio" name="optradio"> 5</label>
+
+              <label class="radio-inline"><input type="radio" name="optradio">
+              	<i class="material-icons">sentiment_very_dissatisfied</i>
+              </label>
+              <label class="radio-inline"><input type="radio" name="optradio">
+              	<i class="material-icons">sentiment_dissatisfied</i>
+              </label>
+              <label class="radio-inline"><input type="radio" name="optradio">
+              	<i class="material-icons">sentiment_neutral</i>
+              </label>
+              <label class="radio-inline"><input type="radio" name="optradio">
+              	<i class="material-icons">sentiment_very_satisfied</i>
+              </label>
+              <label class="radio-inline"><input type="radio" name="optradio">
+              	<i class="material-icons">whatshot</i>
+              </label>
               <br>
               <button type="button" class="btn btn-primary" id="submit" onclick="sned(true)">Submit</button>
               <button type="button" class="btn btn-primary" id="skip" onclick="sned(false)">Skip</button>
