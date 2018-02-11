@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>UChicago Hookup Culture</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="img/logos/hookupculture.png" width="150" height="30" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="feed.html">Meme Feed</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="friends.html">Suggested Friends</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Chat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">Profile</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" href="index.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header> 
+      <div class="container">
+        <div class="display-3">Rate these memes</div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col"> </div>
+        <div class="col">
+          <div class="card">
+            <div class="row">
+              <div class="col" id="updateImg">
+              </div>
+            </div>
+            <div class="card-body">
+              <label class="radio-inline"><input type="radio" name="optradio"> 1</label>
+              <label class="radio-inline"><input type="radio" name="optradio"> 2</label>
+              <label class="radio-inline"><input type="radio" name="optradio"> 3</label>
+              <label class="radio-inline"><input type="radio" name="optradio"> 4</label>
+              <label class="radio-inline"><input type="radio" name="optradio"> 5</label>
+              <br>
+              <button type="button" class="btn btn-primary" id="submit" onclick="sned(true)">Submit</button>
+              <button type="button" class="btn btn-primary" id="skip" onclick="sned(false)">Skip</button>
+            </div>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDZtIhmpQElcmDwjC4KPNL-uAztxyVfEPg",
+        authDomain: "student-life-de3ef.firebaseapp.com",
+        databaseURL: "https://student-life-de3ef.firebaseio.com",
+        projectId: "student-life-de3ef",
+        storageBucket: "student-life-de3ef.appspot.com",
+        messagingSenderId: "126738000442"
+      };
+      firebase.initializeApp(config);
+
+      var inc = 0;
+      var form = document.getElementById("form-id");
+      
+      var pics = firebase.database().ref("Images/img" + inc + "/url");
+      var updatedimg = document.getElementById("updateImg");
+      pics.on("value", snap => updatedimg.innerHTML = "<img class=\"card-img-top\" style = \"width:100%\" src=" + snap.val() + ">");
+
+      function snedUpdate() {
+        var radios = document.getElementsByName('optradio');
+
+        for (var i = 0, length = radios.length; i < length; i++){
+          if (radios[i].checked){
+            radios[i].checked = false;
+            return i+1;
+          }
+        }
+        return 0;
+      }
+
+      function sned(updateVal) {
+        inc++;
+        var pics = firebase.database().ref("Images/img" + inc + "/url");
+        if (pics !== "null") {
+          pics.on("value", snap => updatedimg.innerHTML = "<img class=\"card-img-top\" style = \"width:100%\" src=" + snap.val() + ">");
+        }
+        var vote = snedUpdate();
+        if (updateVal) {
+          console.log(vote);
+        }
+      }
+
+      // $('.submit').click(function () {
+      //   inc++;
+      //   $('.updateImg').selectpicker('refresh');
+      // });
+      console.log(inc);
+    </script>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="copyright">UChicago Hookup Culture</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+
+  </body>
+
+</html>
