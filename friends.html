@@ -58,7 +58,7 @@
     </nav>
 
     <!-- Header -->
-    <input id = "username" value = "Arthur"> </input> <button id = "updateButton"> Update </button>
+    <input id = "username" value = "Arthur"> </input> <button id = "updateButton" onclick = "showFriends()"> Show Friends </button>
     <header>
       <div class="container">
         <div class="display-3">Suggested Friends</div>
@@ -117,20 +117,29 @@
     firebase.database().ref("Users").once("value", function(snapshot) {
       userData = snapshot.val();
       console.log(userData);
+      showFriends(userData);
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
-    firebase.database().ref("Users").on("child_changed", function(snapshot) {
-      userData = snapshot.val();
-      console.log(userData);
-    }, function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    });
-    async function showFriends() {
-      var name = document.getElementById("username").value;
-      console.log(name);
-    }
 
+    //This code is not used yet
+    // firebase.database().ref("Users").on("child_changed", function(snapshot) {
+    //   userData = snapshot.val();
+    //   console.log(userData);
+    // }, function (errorObject) {
+    //   console.log("The read failed: " + errorObject.code);
+    // });
+    var button = document.getElementById("")
+    function showFriends() {
+      console.log("showfriends Run")
+      var name = document.getElementById("username").value;
+      if(name in userData) {
+        console.log(userData[name]);
+      } else {
+        return;
+      }
+
+    }
     </script>
 
   </body>
