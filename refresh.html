@@ -35,10 +35,33 @@
     var text = document.getElementById("textBox").value;
     async function submit() {
       var fireBaseRef = firebase.database().ref("Images/");
+      var userRef = firebase.database().ref("Users");
+      var keys = {};
       if(textBox.value !== "") {
         var res = await getImageURLs(textBox.value);
+        keys = res;
+        for (var key in res) {
+          console.log(key);
+        }
         fireBaseRef.update(res);
       }
+      var newUsers = {};
+      userRef.once("value", function(snapshot) {
+        console.log(snapshot.val());
+        newUsers = snapshot.val();
+        for(var user in newUsers) {
+          for(var key in res) {
+            //if (!(key in user)) {
+              newUsers[user][key] = -1;
+              console.log(newUsers[user]);
+              console.log(key);
+            //}
+          }
+        }
+        userRef.update(newUsers);
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
     }
 
     async function getImageURLs(pageName) {
