@@ -58,7 +58,7 @@
     </nav>
 
     <!-- Header -->
-    <input id = "username"> </input>
+    <input id = "username" value = "Arthur"> </input> <button id = "updateButton"> Update </button>
     <header>
       <div class="container">
         <div class="display-3">Suggested Friends</div>
@@ -71,14 +71,7 @@
           <img class="img-fluid" src="img/avatar.png">
         </div>
         <div class="col-sm-8">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">User 1</h4>
-              <p class="card-text">Similarity %: </p>
-              <a href="#" class="card-link">Start Chat</a>
-              <a href="#" class="card-link">Remove from my list</a>
-            </div>
-          </div>
+          <p id = "friendsList"> </p>
         </div>
 
       </div>
@@ -104,7 +97,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4">
-            <span class="copyright">UChicago Hookup Culture</span>
+            <span class="copyright"></span>
           </div>
         </div>
       </div>
@@ -121,7 +114,13 @@
     <script src="js/agency.min.js"></script>
     <script>
     var userData = {};
-    firebase.database().ref("Users").on("value", function(snapshot) {
+    firebase.database().ref("Users").once("value", function(snapshot) {
+      userData = snapshot.val();
+      console.log(userData);
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+    firebase.database().ref("Users").on("child_changed", function(snapshot) {
       userData = snapshot.val();
       console.log(userData);
     }, function (errorObject) {
