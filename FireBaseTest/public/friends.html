@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UChicago Hookup Culture etc. etc.</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/4.9.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/4.9.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/4.9.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/4.9.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/4.9.1/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light sticky-top">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="feed.html">Meme Feed</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="friends.html">Suggested Friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="profile.html">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Logout</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2">
+          <img class="img-fluid" src="img/avatar.png">
+        </div>
+        <div class="col-sm-8">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">User 1</h4>
+              <p class="card-text">Similarity %: </p>
+              <a href="#" class="card-link">Start Chat</a>
+              <a href="#" class="card-link">Remove from my list</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDZtIhmpQElcmDwjC4KPNL-uAztxyVfEPg",
+        authDomain: "student-life-de3ef.firebaseapp.com",
+        databaseURL: "https://student-life-de3ef.firebaseio.com",
+        projectId: "student-life-de3ef",
+        storageBucket: "student-life-de3ef.appspot.com",
+        messagingSenderId: "126738000442"
+      };
+      firebase.initializeApp(config);
+    </script>
+  </body>
+</html>
